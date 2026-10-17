@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/settings.css" />
+    <title>Timer Settings</title>
+  </head>
+  <body>
+    <div id="preview" aria-hidden="true">
+      <span class="digits on-b">4:20</span>
+      <span class="digits on-a">4:20</span>
+    </div>
+
+    <form id="form">
+      <label class="row">
+        <span>Start color</span>
+        <input type="color" id="colorA" />
+      </label>
+      <label class="row">
+        <span>End color</span>
+        <input type="color" id="colorB" />
+      </label>
+      <label class="row">
+        <span>Sound when done</span>
+        <input type="checkbox" id="sound" />
+      </label>
+      <label class="row">
+        <span>Opacity</span>
+        <span class="slider">
+          <input type="range" id="opacity" min="30" max="100" step="5" />
+          <output id="opacityValue"></output>
+        </span>
+      </label>
+      <div class="actions">
+        <button type="button" id="reset">Reset to defaults</button>
+      </div>
+    </form>
+    <script type="module" src="/src/settings.ts"></script>
+  </body>
+</html>

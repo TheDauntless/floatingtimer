@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <main id="app" class="idle">
+      <form id="idle-view" autocomplete="off">
+        <input id="input" spellcheck="false" placeholder="10m · 1h30 · until 8:30 am" />
+        <div id="preview"></div>
+      </form>
+      <div id="run-view">
+        <div class="time on-b" aria-hidden="true"></div>
+        <div class="time on-a"></div>
+        <div id="until"></div>
+      </div>
+      <div class="grip" data-resize="NorthWest"></div>
+      <div class="grip" data-resize="NorthEast"></div>
+      <div class="grip" data-resize="SouthWest"></div>
+      <div class="grip" data-resize="SouthEast"></div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
