@@ -67,6 +67,7 @@ pub fn open_settings_window(app: &AppHandle) {
         .inner_size(340.0, 290.0)
         .resizable(false)
         .minimizable(false)
+        .always_on_top(true) // stays above the topmost timer on Windows
         .center()
         .build();
     if let Ok(window) = built {

@@ -1,6 +1,5 @@
 mod settings;
 
-use std::process::Command;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, SystemTime, UNIX_EPOCH};
@@ -56,11 +55,16 @@ fn disarm_alarm(alarm: State<Alarm>) {
     alarm.generation.fetch_add(1, Ordering::SeqCst);
 }
 
-/// The macOS "24-hour time" switch; None means follow the locale.
+/// The OS "24-hour time" setting; None means follow the locale.
 #[tauri::command]
 fn uses_24h() -> Option<bool> {
+    os_uses_24h()
+}
+
+#[cfg(target_os = "macos")]
+fn os_uses_24h() -> Option<bool> {
     let read = |key: &str| {
-        Command::new("defaults")
+        std::process::Command::new("defaults")
             .args(["read", "-g", key])
             .output()
             .ok()
@@ -75,6 +79,22 @@ fn uses_24h() -> Option<bool> {
     } else {
         None
     }
+}
+
+/// Region settings store the clock style as iTime: "1" = 24-hour, "0" = 12-hour.
+#[cfg(windows)]
+fn os_uses_24h() -> Option<bool> {
+    use winreg::enums::HKEY_CURRENT_USER;
+    let key = winreg::RegKey::predef(HKEY_CURRENT_USER)
+        .open_subkey("Control Panel\\International")
+        .ok()?;
+    let value: String = key.get_value("iTime").ok()?;
+    Some(value == "1")
+}
+
+#[cfg(not(any(target_os = "macos", windows)))]
+fn os_uses_24h() -> Option<bool> {
+    None
 }
 
 /// Right-click menu on the timer window.
@@ -187,6 +207,13 @@ pub fn run() {
                 if let Some(window) = app.get_webview_window("main") {
                     float_everywhere(&window);
                 }
+            }
+
+            // Windows draws a rectangular shadow around undecorated windows,
+            // which shows up as a box behind the rounded corners.
+            #[cfg(windows)]
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.set_shadow(false);
             }
 
             if let Some(window) = app.get_webview_window("main") {
