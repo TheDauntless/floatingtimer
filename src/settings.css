@@ -44,9 +44,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: ui-monospace, "SF Mono", Menlo, "Cascadia Mono", Consolas, monospace;
   font-size: 30px;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
 }
 
 .digits.on-b {

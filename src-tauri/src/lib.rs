@@ -98,6 +98,12 @@ fn os_uses_24h() -> Option<bool> {
 }
 
 /// Right-click menu on the timer window.
+/// Cmd+W / Ctrl+W in the timer window. Exits the app, same as the Exit menu item.
+#[tauri::command]
+fn quit(app: AppHandle) {
+    app.exit(0);
+}
+
 #[tauri::command]
 fn show_context_menu(window: tauri::Window) -> tauri::Result<()> {
     let settings = MenuItem::with_id(&window, "settings", "Settings…", true, None::<&str>)?;
@@ -189,6 +195,7 @@ pub fn run() {
             disarm_alarm,
             uses_24h,
             show_context_menu,
+            quit,
             settings::get_settings,
             settings::save_settings,
             settings::reset_settings

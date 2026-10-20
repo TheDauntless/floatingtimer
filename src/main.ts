@@ -118,6 +118,7 @@ function tick() {
 function setTime(text: string) {
   if (text === shownText) return;
   shownText = text;
+  app.style.setProperty("--chars", String(text.length));
   timeLayers.forEach((el) => (el.textContent = text));
 }
 
@@ -192,7 +193,10 @@ input.addEventListener("input", updatePreview);
 form.addEventListener("animationend", () => form.classList.remove("shake"));
 
 document.addEventListener("keydown", (e) => {
-  if (state.kind === "finished") {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "w") {
+    e.preventDefault();
+    void invoke("quit");
+  } else if (state.kind === "finished") {
     e.preventDefault();
     dismiss();
   } else if (state.kind === "running") {

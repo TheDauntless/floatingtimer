@@ -12,7 +12,7 @@ A small countdown timer for macOS and Windows that floats above every other wind
 
 ## Features
 
-- **Always on top**, as a borderless, rounded window that stays out of the Dock and taskbar. On macOS it also floats over full-screen apps and on every Space.
+- **Always on top**, as a borderless, rounded window. On Windows it has a taskbar button; on macOS it stays out of the Dock but floats over full-screen apps and on every Space.
 - **Plain-language input**: durations (`10m`, `1h30`, `90s`) or clock times (`until 8 am`, `until 17:45`), with a live "ends at…" preview as you type.
 - **Progress sweep**: a hard-edged fill from the start color to the end color, with digits that stay readable on both colors.
 - **Accurate across sleep**: the timer tracks the wall clock, not a tick counter, so 10 minutes of laptop sleep count as 10 minutes. If it ends while asleep, it fires on wake.
@@ -50,6 +50,7 @@ Durations are capped at 24 hours.
 | Move | Drag anywhere |
 | Resize | Drag a corner |
 | Show the timer and focus the input | `Cmd + Option + T` (macOS) or `Ctrl + Alt + T` (Windows), from any app |
+| Exit | `Cmd + W` (macOS) or `Ctrl + W` (Windows) while the timer is focused |
 | Settings / Exit | Right-click the timer, or use the menu-bar / system-tray icon |
 | See the end time | Hover over a running timer |
 

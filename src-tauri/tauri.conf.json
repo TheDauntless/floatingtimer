@@ -23,7 +23,7 @@
         "transparent": true,
         "alwaysOnTop": true,
         "visibleOnAllWorkspaces": true,
-        "skipTaskbar": true,
+        "skipTaskbar": false,
         "resizable": true,
         "acceptFirstMouse": true
       }

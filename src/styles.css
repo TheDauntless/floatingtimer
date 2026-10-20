@@ -4,7 +4,9 @@
   --on-a: #000;
   --on-b: #000;
   --p: 0%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --chars: 5;
+  /* Monospace everywhere, so digits and the input never shift width. */
+  font-family: ui-monospace, "SF Mono", Menlo, "Cascadia Mono", Consolas, monospace;
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
@@ -56,7 +58,8 @@ body {
   color: var(--on-a);
   font-family: inherit;
   font-weight: 600;
-  font-size: clamp(13px, 20vh, 20px);
+  /* Monospace runs wide: scale with the width too, so the placeholder fits. */
+  font-size: clamp(11px, min(20vh, 5.5vw), 18px);
   line-height: 1.3;
   text-align: center;
   padding: 2px 0;
@@ -88,10 +91,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: min(62vh, 24vw);
+  /* Monospace glyphs are ~0.6em wide; fit the current text (m:ss or h:mm:ss) to the width. */
+  font-size: min(62vh, calc(88vw / (var(--chars) * 0.6)));
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
   transition: opacity 0.2s;
 }
 

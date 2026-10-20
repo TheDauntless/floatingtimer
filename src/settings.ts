@@ -37,7 +37,7 @@ for (const el of [colorA, colorB, sound, opacity]) el.addEventListener("input", 
 reset.addEventListener("click", async () => show(await invoke<Settings>("reset_settings")));
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") window.close();
+  if (e.key === "Escape" || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "w")) window.close();
 });
 
 show(DEFAULT_SETTINGS);
